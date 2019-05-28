@@ -51,8 +51,9 @@ public class SkillServlet extends HttpServlet {
             //Listar estudiantes
             case 1:
                 try {
+                    String usuario = request.getParameter("usuario");
                     /// obtengo la lista desde el bk
-                    skills = (ArrayList) principal.listarSkills();
+                    skills = (ArrayList) principal.listarSkills(usuario);
                 } catch (GlobalException | NoDataException ex) {
                     Logger.getLogger(SkillServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -75,7 +76,7 @@ public class SkillServlet extends HttpServlet {
                     if(insertarSkills(skill)){
                         try {
                             //actualiza la lista
-                            skills = (ArrayList)principal.listarSkills();
+                            skills = (ArrayList)principal.listarSkills(skill.getUsuario());
                         } catch (GlobalException | NoDataException ex) {
                             out.println("Error al listar.");
                         }
@@ -119,7 +120,7 @@ public class SkillServlet extends HttpServlet {
                     if(modificarSkills(skilledit)){
                         try {
                             /// se modifica la lista
-                            skills = (ArrayList)principal.listarSkills();
+                            skills = (ArrayList)principal.listarSkills(skilledit.getUsuario());
                         } catch (GlobalException | NoDataException ex) {
                             Logger.getLogger(SkillServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
