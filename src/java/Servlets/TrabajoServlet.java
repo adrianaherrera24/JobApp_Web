@@ -52,8 +52,9 @@ public class TrabajoServlet extends HttpServlet {
             //Listar estudiantes
             case 1:
                 try {
+                    String usuario = request.getParameter("usuario");
                     /// obtengo la lista desde el bk
-                    trabajos = (ArrayList) principal.listarTrabajos();
+                    trabajos = (ArrayList) principal.listarTrabajos(usuario);
                 } catch (GlobalException | NoDataException ex) {
                     Logger.getLogger(TrabajoServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -79,7 +80,7 @@ public class TrabajoServlet extends HttpServlet {
                     if(insertarTrabajos(trabajo)){
                         try {
                             //actualiza la lista
-                            trabajos = (ArrayList)principal.listarTrabajos();
+                            trabajos = (ArrayList)principal.listarTrabajos(trabajo.getUsuario());
                         } catch (GlobalException | NoDataException ex) {
                             out.println("Error al listar.");
                         }
@@ -132,7 +133,7 @@ public class TrabajoServlet extends HttpServlet {
                     if(modificarTrabajos(trabajoedit)){
                         try {
                             /// se modifica la lista
-                            trabajos = (ArrayList)principal.listarTrabajos();
+                            trabajos = (ArrayList)principal.listarTrabajos(trabajoedit.getUsuario());
                         } catch (GlobalException | NoDataException ex) {
                             Logger.getLogger(TrabajoServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
