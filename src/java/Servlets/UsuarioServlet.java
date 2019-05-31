@@ -116,7 +116,7 @@ public class UsuarioServlet extends HttpServlet {
                     usedit.setId(request.getParameter("id"));
                     usedit.setNombre(request.getParameter("nombre"));
                     usedit.setEmail(request.getParameter("email"));
-                    usedit.setPassword(request.getParameter("email"));
+                    usedit.setPassword(request.getParameter("password"));
                     usedit.setPrivilegio(request.getParameter("privilegio"));
                     
                     if(modificarUsuarios(usedit)){
